@@ -4,9 +4,7 @@ from random import randint
 from tensorflow.keras.models import load_model
 
 def initializePredictionModel():
-    model_files = ['model_trained copy.h5', 'model_trained.h5']
-    model_file = model_files[randint(0, len(model_files) - 1)]
-    model = load_model(model_file)
+    model = load_model('model_trained.h5')
     print(model.summary())
     return model
 
@@ -61,7 +59,7 @@ def getPrediction(boxes, model):
         classIndex = np.argmax(predictions, axis=-1)
         probabilityValue = np.amax(predictions)
         print(classIndex, probabilityValue)
-        if probabilityValue > 0.6:
+        if probabilityValue > 0.5:
             result.append(classIndex[0])
         else:
             result.append(0)
